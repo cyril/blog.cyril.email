@@ -1,0 +1,36 @@
+name: Build
+
+# Verification only. The derived files — feed.json, sitemap.xml and the two
+# generated regions of index.html — are built locally and committed alongside
+# the post they describe, so GitHub Pages publishes them in the same deploy: a
+# commit pushed by a workflow with the default GITHUB_TOKEN does not trigger a
+# Pages build, which would have left the published site one post behind.
+#
+# This job fails if any derived file was not regenerated, or if a page lost its
+# feed autodiscovery link.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+
+      - name: Run the test suite
+        run: ruby test/build_test.rb
+
+      - name: Verify the derived files are up to date
+        run: ruby bin/build.rb --check

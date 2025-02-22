@@ -1,0 +1,218 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Cyril Kato's blog",
+  "home_page_url": "https://blog.cyril.email/",
+  "feed_url": "https://blog.cyril.email/feed.json",
+  "description": "Articles on abstract strategy board games, notation systems, and open-source development.",
+  "language": "en",
+  "icon": "https://blog.cyril.email/favicon/web-app-manifest-512x512.png",
+  "favicon": "https://blog.cyril.email/favicon/favicon-96x96.png",
+  "author": {
+    "name": "Cyril Kato",
+    "url": "https://cyril.email/",
+    "avatar": "https://cyril.email/img/cyril-kato,w_384.webp"
+  },
+  "authors": [
+    {
+      "name": "Cyril Kato",
+      "url": "https://cyril.email/",
+      "avatar": "https://cyril.email/img/cyril-kato,w_384.webp"
+    }
+  ],
+  "items": [
+    {
+      "id": "https://blog.cyril.email/posts/2026-11-01/specs-and-tests-are-two-different-things.html",
+      "url": "https://blog.cyril.email/posts/2026-11-01/specs-and-tests-are-two-different-things.html",
+      "title": "Specs and Tests Are Two Different Things",
+      "summary": "A test suite is only as trustworthy as the framework beneath it, and a framework is a program like any other. Why I wrote my own, what it keeps apart, and why it took twelve years to call it finished.",
+      "content_text": "A test suite is only as trustworthy as the framework beneath it, and a framework is a program like any other. Why I wrote my own, what it keeps apart, and why it took twelve years to call it finished.",
+      "date_published": "2026-11-01T00:00:00Z",
+      "tags": [
+        "Software",
+        "Ruby",
+        "testing",
+        "Fix",
+        "RSpec"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2026-08-29/eight-pawns.html",
+      "url": "https://blog.cyril.email/posts/2026-08-29/eight-pawns.html",
+      "title": "Eight Pawns",
+      "summary": "Nothing is duller than a perfectly symmetrical game. Asymmetry from the first move is the antidote—and three traditions already supply it. The only thing they need to share is the board.",
+      "content_text": "Nothing is duller than a perfectly symmetrical game. Asymmetry from the first move is the antidote—and three traditions already supply it. The only thing they need to share is the board.",
+      "date_published": "2026-08-29T00:00:00Z",
+      "tags": [
+        "Game Culture",
+        "chess",
+        "shōgi",
+        "xiàngqí",
+        "Philidor"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2026-01-29/just-a-dot.html",
+      "url": "https://blog.cyril.email/posts/2026-01-29/just-a-dot.html",
+      "title": "Just a Dot",
+      "summary": "In shōgi, a single dot separates the King from the Jeweled King. A mark with no effect on the rules—yet one that has endured for centuries.",
+      "content_text": "In shōgi, a single dot separates the King from the Jeweled King. A mark with no effect on the rules—yet one that has endured for centuries.",
+      "date_published": "2026-01-29T00:00:00Z",
+      "tags": [
+        "Game Culture",
+        "shōgi",
+        "tradition",
+        "Japanese culture"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2026-01-21/a-linguistic-fingerprint.html",
+      "url": "https://blog.cyril.email/posts/2026-01-21/a-linguistic-fingerprint.html",
+      "title": "A Linguistic Fingerprint",
+      "summary": "The Accept-Language HTTP header as a linguistic fingerprint—a trace of where you've lived, what you've studied, and what you refuse to read.",
+      "content_text": "The Accept-Language HTTP header as a linguistic fingerprint—a trace of where you've lived, what you've studied, and what you refuse to read.",
+      "date_published": "2026-01-21T00:00:00Z",
+      "tags": [
+        "Web Development",
+        "Accept-Language",
+        "HTTP",
+        "i18n",
+        "Ruby"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2026-01-16/a-coordinate-format-for-multi-dimensional-boards.html",
+      "url": "https://blog.cyril.email/posts/2026-01-16/a-coordinate-format-for-multi-dimensional-boards.html",
+      "title": "A Coordinate Format for Multi-Dimensional Boards",
+      "summary": "CELL (Coordinate Encoding for Layered Locations): a coordinate format for multi-dimensional board games, isolating and extending the coordinate system developed by Philip Stamma in the 1730s.",
+      "content_text": "CELL (Coordinate Encoding for Layered Locations): a coordinate format for multi-dimensional board games, isolating and extending the coordinate system developed by Philip Stamma in the 1730s.",
+      "date_published": "2026-01-16T00:00:00Z",
+      "tags": [
+        "Game Development",
+        "CELL",
+        "algebraic notation",
+        "coordinates",
+        "board games"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2026-01-12/free-svg-assets-for-abstract-strategy-board-games.html",
+      "url": "https://blog.cyril.email/posts/2026-01-12/free-svg-assets-for-abstract-strategy-board-games.html",
+      "title": "Free SVG Assets for Abstract Strategy Board Games",
+      "summary": "Free, public domain SVG assets for abstract strategy board games—pieces and boards for chess, ogi, and xiongqi traditions.",
+      "content_text": "Free, public domain SVG assets for abstract strategy board games—pieces and boards for chess, ogi, and xiongqi traditions.",
+      "date_published": "2026-01-12T00:00:00Z",
+      "tags": [
+        "Game Development",
+        "SVG",
+        "chess",
+        "ogi",
+        "xiongqi",
+        "game assets"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2025-11-08/the-gentle-threat.html",
+      "url": "https://blog.cyril.email/posts/2025-11-08/the-gentle-threat.html",
+      "title": "The Gentle Threat: From Capture to Convention",
+      "summary": "Why differences between Chess, Shogi, and Xiangqi are mostly matters of style rather than rules—from capture to convention, resignation to inevitability.",
+      "content_text": "Why differences between Chess, Shogi, and Xiangqi are mostly matters of style rather than rules—from capture to convention, resignation to inevitability.",
+      "date_published": "2025-11-08T00:00:00Z",
+      "tags": [
+        "Game Development",
+        "chess theory",
+        "Sashité",
+        "CGSN",
+        "abstract strategy",
+        "board games"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2025-10-14/beyond-checkmate-king-lexicon.html",
+      "url": "https://blog.cyril.email/posts/2025-10-14/beyond-checkmate-king-lexicon.html",
+      "title": "Beyond Checkmate: A Lexicon for the King's Fate",
+      "summary": "A rule-agnostic lexicon for naming observable king states across chess traditions, with a tri-lingual mapping (Persian, Old French, English) and a pointer to the CGSN status spec.",
+      "content_text": "A rule-agnostic lexicon for naming observable king states across chess traditions, with a tri-lingual mapping (Persian, Old French, English) and a pointer to the CGSN status spec.",
+      "date_published": "2025-10-14T00:00:00Z",
+      "tags": [
+        "Game Development",
+        "chess history",
+        "Sashité",
+        "CGSN",
+        "notation",
+        "board games"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2025-10-07/pcn-and-pgn-complementary-notation.html",
+      "url": "https://blog.cyril.email/posts/2025-10-07/pcn-and-pgn-complementary-notation.html",
+      "title": "PCN and PGN: Complementary Approaches to Game Notation",
+      "summary": "PCN: A format-agnostic game notation supporting TOML and JSON, designed for cross-variant abstract strategy games.",
+      "content_text": "PCN: A format-agnostic game notation supporting TOML and JSON, designed for cross-variant abstract strategy games.",
+      "date_published": "2025-10-07T00:00:00Z",
+      "tags": [
+        "Game Development",
+        "PCN",
+        "PGN",
+        "chess notation",
+        "board games",
+        "game development"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2025-05-01/introducing-feen-notation.html",
+      "url": "https://blog.cyril.email/posts/2025-05-01/introducing-feen-notation.html",
+      "title": "Introducing FEEN: A Simple, Canonical Notation for Board Positions",
+      "summary": "FEEN (Field Expression Encoding Notation): a minimalistic, rule-agnostic format for representing board positions in chess variants and other board games, designed for canonicity and flexibility.",
+      "content_text": "FEEN (Field Expression Encoding Notation): a minimalistic, rule-agnostic format for representing board positions in chess variants and other board games, designed for canonicity and flexibility.",
+      "date_published": "2025-05-01T00:00:00Z",
+      "tags": [
+        "Game Development",
+        "FEEN",
+        "chess notation",
+        "board games",
+        "game development"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2025-03-12/url-protection-through-hmac.html",
+      "url": "https://blog.cyril.email/posts/2025-03-12/url-protection-through-hmac.html",
+      "title": "URL Protection Through HMAC: A Practical Approach",
+      "summary": "A practical approach to URL protection using HMAC for secure, tamper-proof links, with applications in CSRF protection and passwordless authentication.",
+      "content_text": "A practical approach to URL protection using HMAC for secure, tamper-proof links, with applications in CSRF protection and passwordless authentication.",
+      "date_published": "2025-03-12T00:00:00Z",
+      "tags": [
+        "Web Security",
+        "HMAC",
+        "URL security",
+        "CSRF protection",
+        "authentication"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://blog.cyril.email/posts/2025-02-22/a-minimal-hash-based-symmetric-encryption-protocol.html",
+      "url": "https://blog.cyril.email/posts/2025-02-22/a-minimal-hash-based-symmetric-encryption-protocol.html",
+      "title": "A Minimal Hash-Based Symmetric Encryption Protocol",
+      "summary": "A minimal symmetric encryption protocol using hash functions for message confidentiality, focusing on simplicity and fundamental cryptographic principles.",
+      "content_text": "A minimal symmetric encryption protocol using hash functions for message confidentiality, focusing on simplicity and fundamental cryptographic principles.",
+      "date_published": "2025-02-22T00:00:00Z",
+      "tags": [
+        "Cryptography",
+        "encryption",
+        "hash functions",
+        "security"
+      ],
+      "language": "en"
+    }
+  ]
+}

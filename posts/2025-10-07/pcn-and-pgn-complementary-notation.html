@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="PCN: A format-agnostic game notation supporting TOML and JSON, designed for cross-variant abstract strategy games.">
+    <meta name="keywords" content="PCN, PGN, chess notation, board games, shogi, xiangqi, makruk, game notation, TOML, JSON, FEEN, PMN, Cyril Kato">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Cyril Kato">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="PCN and PGN: Complementary Approaches to Game Notation">
+    <meta property="og:description" content="PCN: A format-agnostic game notation supporting TOML and JSON, designed for cross-variant abstract strategy games.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.cyril.email/posts/2025-10-07/pcn-and-pgn-complementary-notation.html">
+    <meta property="og:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta property="og:site_name" content="Cyril Kato's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-10-07">
+    <meta property="article:modified_time" content="2026-06-03">
+    <meta property="article:author" content="Cyril Kato">
+    <meta property="article:section" content="Game Development">
+    <meta property="article:tag" content="PCN">
+    <meta property="article:tag" content="PGN">
+    <meta property="article:tag" content="chess notation">
+    <meta property="article:tag" content="board games">
+    <meta property="article:tag" content="game development">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="PCN and PGN: Complementary Approaches to Game Notation">
+    <meta name="twitter:description" content="PCN: A format-agnostic game notation supporting TOML and JSON, designed for cross-variant abstract strategy games.">
+    <meta name="twitter:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta name="twitter:image:alt" content="Cyril Kato">
+
+    <title>PCN and PGN: Complementary Approaches to Game Notation</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon/favicon.svg">
+    <link rel="icon" type="image/png" href="../../favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-title" content="Cyril's Blog">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="canonical" href="https://blog.cyril.email/posts/2025-10-07/pcn-and-pgn-complementary-notation.html">
+
+    <!-- Feed -->
+    <link rel="alternate" type="application/feed+json" title="Cyril Kato's blog" href="/feed.json">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "PCN and PGN: Complementary Approaches to Game Notation",
+            "description": "PCN: A format-agnostic game notation supporting TOML and JSON, designed for cross-variant abstract strategy games.",
+            "datePublished": "2025-10-07",
+            "dateModified": "2026-06-03",
+            "author": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/",
+                "image": "https://cyril.email/img/cyril-kato,w_384.webp",
+                "jobTitle": "Open Source Developer",
+                "sameAs": [
+                    "https://github.com/cyril",
+                    "https://bsky.app/profile/cyril.email"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/"
+            },
+            "url": "https://blog.cyril.email/posts/2025-10-07/pcn-and-pgn-complementary-notation.html",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://blog.cyril.email/posts/2025-10-07/pcn-and-pgn-complementary-notation.html"
+            },
+            "keywords": ["PCN", "PGN", "chess notation", "board games", "shogi", "xiangqi", "makruk", "game notation", "TOML", "JSON", "FEEN", "PMN"],
+            "articleSection": "Game Development",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@type": "Blog",
+                "name": "Cyril Kato's Blog",
+                "url": "https://blog.cyril.email/"
+            },
+            "about": [
+                {
+                    "@type": "Thing",
+                    "name": "PCN Notation",
+                    "description": "Portable Chess Notation for abstract strategy board game records"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "PGN Format",
+                    "description": "Portable Game Notation standard for chess"
+                }
+            ]
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <p>Cyril Kato's blog</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="https://cyril.email/" title="About Cyril Kato">About</a></li>
+                <li><a href="/" title="Cyril Kato's blog posts">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <header>
+                <h1>PCN and PGN: Complementary Approaches to Game Notation</h1>
+                <time datetime="2025-10-07">October 7, 2025</time>
+            </header>
+
+            <section>
+                <p>For decades, PGN (Portable Game Notation) has served the chess community well. It emerged in the early 1990s as a plain-text standard for recording games, and it remains the foundation for countless engines, databases, and training materials. I have used it extensively, and I appreciate what it achieves within its domain.</p>
+
+                <p>Yet as I explored other traditions—shogi, xiangqi, makruk—I kept running into the same friction. PGN was designed specifically for Western chess. Its assumptions about board geometry, piece behavior, and game state are deeply embedded in the format. Adapting it to other games felt like forcing a square peg into a round hole.</p>
+
+                <p>This led me to develop PCN (Portable Chess Notation): a format-agnostic alternative that aims to record games across chess-family traditions without privileging any single rule set. This article explains the motivation behind PCN and how it complements rather than replaces PGN.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>What PGN does well</h2>
+
+                <p>PGN deserves its longevity. It offers broad interoperability across software, supports rich annotations, follows standardized metadata conventions, and benefits from the durability of plain text. From club archives to online repositories, from engine analysis to preparation workflows, PGN has proven its worth.</p>
+
+                <p>But PGN was designed for a specific game, and that specificity—its strength for chess—becomes a limitation elsewhere.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>A classic example</h2>
+
+                <p>Consider this miniature from Gioachino Greco's 1620 manuscript <em>Trattato Del Nobilissimo Gioco De Scacchi</em>. Like many of Greco's games, it is likely a didactic construction rather than an actual game record:</p>
+
+                <pre><code>[Event "?"]
+[Site "?"]
+[Date "1620.??.??"]
+[White "Greco"]
+[Black "NN"]
+[Result "1-0"]
+
+1. e4 e5 2. Nf3 Qf6 3. Bc4 Qg6 4. O-O Qxe4
+5. Bxf7+ Ke7 6. Re1 Qf4 7. Rxe5+ Kxf7
+8. d4 Qf6 9. Ng5+ Kg6 10. Qd3+ Kh5 11. g4+ 1-0</code></pre>
+
+                <p>Black resigns after 11. g4+ as checkmate is unavoidable. The example illustrates PGN's strengths: compact notation, embedded metadata, conventions aligned with chess tournament requirements.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Where PGN falls short</h2>
+
+                <p>Shogi has developed its own notation ecosystems—KIF for traditional Japanese text, CSA for software, SFEN/USI for modern engines. PGN cannot naturally accommodate shogi's fundamental mechanics: pieces dropping from reserve, promoted piece states, a 9×9 board with different movement rules.</p>
+
+                <p>Xiangqi presents similar challenges. It operates on a 9×10 grid with distinct spatial constraints like the river and palace. PGN's assumptions about board geometry are rooted in the 8×8 Western chess board. Xiangqi communities rely on dedicated formats like XQF and various server-specific notations.</p>
+
+                <p>These are not failings of PGN—they reflect its design scope. But for someone interested in multiple traditions, the fragmentation is inconvenient.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>The case for a broader approach</h2>
+
+                <p>I wanted a single format that could serve several purposes: unified tools spanning chess-family traditions, preservation of regional and historical game systems, consolidated datasets for comparative research, and support for emerging variants without inventing new protocols each time.</p>
+
+                <p>This led to PCN.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>How PCN works</h2>
+
+                <p>PCN is a recording format designed to remain rule-agnostic and notation-agnostic across many chess-family traditions. The <a href="https://sashite.dev/specs/pcn/1.0.0/">full specification</a> is available on the Sashité website.</p>
+
+                <p>PCN supports two serialization options: TOML for human-readable configuration files, and JSON for web services and programmatic access. Both encode the same logical structure.</p>
+
+                <p>The format integrates with modular companion specifications. PMN (Portable Move Notation) encodes individual plies with explicit operator semantics—displacement (<code>e2-e4</code>), capture (<code>d1+f3</code>), and castling (<code>e1~g1</code>). FEEN (Field Expression Encoding Notation) handles position encoding, including reserves for drop-capable games.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Greco's miniature in PCN</h2>
+
+                <p>The same game expressed in PCN using TOML serialization:</p>
+
+                <pre><code>[meta]
+name = "Greco Miniature"
+comment = "From Trattato Del Nobilissimo Gioco De Scacchi (1620)"
+rule_system = "standard"
+
+[sides.first]
+name = "Greco"
+variant = "Chess"
+
+[sides.second]
+name = "NN"
+variant = "Chess"
+
+[setup]
+feen = "-rnbqk^bn-r/+p+p+p+p+p+p+p+p/8/8/8/8/+P+P+P+P+P+P+P+P/-RNBQK^BN-R / W/w"
+
+[[plies]]
+pmn = "e2-e4"
+
+[[plies]]
+pmn = "e7-e5"
+
+[[plies]]
+pmn = "g1-f3"
+
+[[plies]]
+pmn = "d8-f6"
+assessment = "dubious"
+
+[[plies]]
+pmn = "f1-c4"
+
+[[plies]]
+pmn = "f6-g6"
+
+[[plies]]
+pmn = "e1~g1"
+
+[[plies]]
+pmn = "g6+e4"
+assessment = "mistake"
+
+[[plies]]
+pmn = "c4+f7"
+check = true
+assessment = "brilliant"
+
+[[plies]]
+pmn = "e8-e7"
+
+[[plies]]
+pmn = "f1-e1"
+
+[[plies]]
+pmn = "e4-f4"
+
+[[plies]]
+pmn = "e1+e5"
+check = true
+
+[[plies]]
+pmn = "e7+f7"
+
+[[plies]]
+pmn = "d2-d4"
+
+[[plies]]
+pmn = "f4-f6"
+
+[[plies]]
+pmn = "f3-g5"
+check = true
+
+[[plies]]
+pmn = "f7-g6"
+
+[[plies]]
+pmn = "d1-d3"
+check = true
+
+[[plies]]
+pmn = "g6-h5"
+
+[[plies]]
+pmn = "g2-g4"
+check = true
+
+[outcome]
+result = "1-0"</code></pre>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Key differences from PGN</h2>
+
+                <p>Several design choices distinguish PCN from PGN.</p>
+
+                <p>PCN offers a choice of serialization—TOML for configuration-friendly files, JSON for APIs. The ply encoding through PMN removes ambiguity about which piece moved and how, using explicit operators rather than relying on context. Metadata is organized in structured objects rather than tag pairs. Each player can declare their own variant, enabling multi-variant games. Time control supports Fischer increment, fixed banks, and quota-based systems with per-ply timing through a flexible periods array. Assessments like "good", "mistake", "brilliant", "blunder", "interesting", and "dubious" map to PGN's NAG system but use readable strings. And custom properties can be added at any level without conflicting with the specification.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Getting started</h2>
+
+                <p>Reference implementations are available for <a href="https://github.com/sashite/pcn.rb">Ruby</a> and <a href="https://github.com/sashite/pcn.ex">Elixir</a>. Both provide parsing, validation, and serialization of PCN documents in TOML and JSON formats.</p>
+
+                <p>The companion specifications are documented on the Sashité website: <a href="https://sashite.dev/specs/feen/1.0.0/">FEEN</a> for position encoding and <a href="https://sashite.dev/specs/pmn/1.0.0/">PMN</a> for move notation.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Conclusion</h2>
+
+                <p>PGN and PCN serve complementary purposes. PGN remains the definitive standard for Western chess, backed by decades of tooling, community adoption, and annotation conventions. I have no intention of displacing it.</p>
+
+                <p>PCN offers an alternative for projects that need format flexibility, multi-variant capability, or integration with modular specifications. Its rule-agnostic design accommodates shogi, xiangqi, makruk, and multi-variant games within a single framework.</p>
+
+                <p>The choice depends on the project's scope. For pure chess work, PGN is the sensible default. For cross-tradition applications, PCN might be worth exploring.</p>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>© 2014–2025 Cyril Kato. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Why differences between Chess, Shogi, and Xiangqi are mostly matters of style rather than rules—from capture to convention, resignation to inevitability.">
+    <meta name="keywords" content="chess, shogi, xiangqi, checkmate, stalemate, self-check, terminal piece, abstract strategy, Sashité, CGSN, Cyril Kato, game design, style vs rules">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Cyril Kato">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="The Gentle Threat: From Capture to Convention">
+    <meta property="og:description" content="Why differences between Chess, Shogi, and Xiangqi are mostly matters of style—from capture to convention, resignation to inevitability.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.cyril.email/posts/2025-11-08/the-gentle-threat.html">
+    <meta property="og:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta property="og:site_name" content="Cyril Kato's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-11-08">
+    <meta property="article:author" content="Cyril Kato">
+    <meta property="article:section" content="Game Development">
+    <meta property="article:tag" content="chess theory">
+    <meta property="article:tag" content="Sashité">
+    <meta property="article:tag" content="CGSN">
+    <meta property="article:tag" content="abstract strategy">
+    <meta property="article:tag" content="board games">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="The Gentle Threat: From Capture to Convention">
+    <meta name="twitter:description" content="Differences across Chess, Shogi, and Xiangqi boil down to style more than rules—tracing the path from capture to convention.">
+    <meta name="twitter:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta name="twitter:image:alt" content="Cyril Kato">
+
+    <title>The Gentle Threat: From Capture to Convention</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon/favicon.svg">
+    <link rel="icon" type="image/png" href="../../favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-title" content="Cyril's Blog">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="canonical" href="https://blog.cyril.email/posts/2025-11-08/the-gentle-threat.html">
+
+    <!-- Feed -->
+    <link rel="alternate" type="application/feed+json" title="Cyril Kato's blog" href="/feed.json">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "The Gentle Threat: From Capture to Convention",
+            "description": "Why differences between Chess, Shogi, and Xiangqi are mostly matters of style rather than rules—from capture to convention, resignation to inevitability.",
+            "datePublished": "2025-11-08",
+            "dateModified": "2025-11-08",
+            "author": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/",
+                "image": "https://cyril.email/img/cyril-kato,w_384.webp",
+                "jobTitle": "Open Source Developer",
+                "sameAs": [
+                    "https://github.com/cyril",
+                    "https://bsky.app/profile/cyril.email"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/"
+            },
+            "url": "https://blog.cyril.email/posts/2025-11-08/the-gentle-threat.html",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://blog.cyril.email/posts/2025-11-08/the-gentle-threat.html"
+            },
+            "keywords": ["chess", "shogi", "xiangqi", "checkmate", "stalemate", "self-check", "terminal piece", "abstract strategy", "Sashité", "CGSN"],
+            "articleSection": "Game Development",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@type": "Blog",
+                "name": "Cyril Kato's Blog",
+                "url": "https://blog.cyril.email/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <p>Cyril Kato's blog</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="https://cyril.email/" title="About Cyril Kato">About</a></li>
+                <li><a href="/" title="Cyril Kato's blog posts">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <header>
+                <h1>The Gentle Threat: From Capture to Convention</h1>
+                <time datetime="2025-11-08">November 8, 2025</time>
+            </header>
+
+            <section>
+                <p>The longer I spend with chess variants, the more I find myself questioning what actually distinguishes them. We speak of different rules: board sizes, piece movements, capture mechanics, promotion zones. But when I look closely, many of these differences feel less like fundamental divergences and more like choices of emphasis—preferences for grip or momentum, closure or circulation, material economy or positional plasticity.</p>
+
+                <p>Consider the king's fate. In some historical forms of the game, play continued until the king was actually captured—removed from the board like any other piece. Resignation offered an earlier exit, but the terminal criterion remained concrete: take the piece that conditions the continuity of play. In other traditions, the game stops at the recognition of inevitability. The king is in check with no escape; we halt at mate without demanding the act itself.</p>
+
+                <p>I have come to see these as variations in etiquette rather than mechanics. The underlying structure is the same: a position from which capture cannot be avoided. Whether we stop there or carry through is a matter of convention.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Stalemate and self-check</h2>
+
+                <p>A symmetric case leads to the same verdict by a different path. In stalemate aligned toward self-check, the king is not currently attacked, yet every legal move would place it under attack. Whatever the player chooses, capture becomes guaranteed by the structure of the position. Again, the difference between stopping and carrying out the capture belongs to implementation, not principle.</p>
+
+                <p>Why forbid self-check at all? I think of it as a design choice rather than a necessity. If moving into check condemns the king, then the position already contains the punishment. One may prefer to preserve the freedom to condemn oneself, or to bound that freedom by convention. Neither choice alters the inner logic of the game.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Style, not substance</h2>
+
+                <p>When I catalog the apparent divergences—Western chess versus shogi versus xiangqi—I find they map more easily onto historical and cultural biases than onto structural differences. The pieces move differently, yes. The boards have different shapes. Captured pieces return to play in one tradition and vanish in another. But the core remains: two players, alternating moves, seeking to corner a terminal piece.</p>
+
+                <p>This realization has shaped how I approach the Sashité project. Rather than treating each variant as a separate domain requiring its own notation and tooling, I have tried to find the common skeleton beneath the cultural flesh. The specifications I have developed—FEEN for positions, PMN for moves, CGSN for game states—are attempts to describe what is shared before encoding what differs.</p>
+
+                <p>Chess, shogi, xiangqi: one game wearing different faces. What varies is style, and style is the way a single idea finds its expression in the world.</p>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>© 2014–2025 Cyril Kato. All rights reserved.</p>
+    </footer>
+</body>
+</html>

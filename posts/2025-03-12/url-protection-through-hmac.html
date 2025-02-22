@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="A practical approach to URL protection using HMAC for secure, tamper-proof links, with applications in CSRF protection and passwordless authentication.">
+    <meta name="keywords" content="HMAC, URL security, CSRF protection, passwordless authentication, magic links, web security, Cyril Kato">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Cyril Kato">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="URL Protection Through HMAC: A Practical Approach">
+    <meta property="og:description" content="A practical approach to URL protection using HMAC for secure, tamper-proof links, with applications in CSRF protection and passwordless authentication.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.cyril.email/posts/2025-03-12/url-protection-through-hmac.html">
+    <meta property="og:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta property="og:site_name" content="Cyril Kato's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-03-12">
+    <meta property="article:author" content="Cyril Kato">
+    <meta property="article:section" content="Web Security">
+    <meta property="article:tag" content="HMAC">
+    <meta property="article:tag" content="URL security">
+    <meta property="article:tag" content="CSRF protection">
+    <meta property="article:tag" content="authentication">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="URL Protection Through HMAC: A Practical Approach">
+    <meta name="twitter:description" content="A practical approach to URL protection using HMAC for secure, tamper-proof links, with applications in CSRF protection and passwordless authentication.">
+    <meta name="twitter:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta name="twitter:image:alt" content="Cyril Kato">
+
+    <title>URL Protection Through HMAC: A Practical Approach</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon/favicon.svg">
+    <link rel="icon" type="image/png" href="../../favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-title" content="Cyril's Blog">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="canonical" href="https://blog.cyril.email/posts/2025-03-12/url-protection-through-hmac.html">
+
+    <!-- Feed -->
+    <link rel="alternate" type="application/feed+json" title="Cyril Kato's blog" href="/feed.json">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "URL Protection Through HMAC: A Practical Approach",
+            "description": "A practical approach to URL protection using HMAC for secure, tamper-proof links, with applications in CSRF protection and passwordless authentication.",
+            "datePublished": "2025-03-12",
+            "dateModified": "2025-03-12",
+            "author": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/",
+                "image": "https://cyril.email/img/cyril-kato,w_384.webp",
+                "jobTitle": "Open Source Developer",
+                "sameAs": [
+                    "https://github.com/cyril",
+                    "https://bsky.app/profile/cyril.email"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/"
+            },
+            "url": "https://blog.cyril.email/posts/2025-03-12/url-protection-through-hmac.html",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://blog.cyril.email/posts/2025-03-12/url-protection-through-hmac.html"
+            },
+            "keywords": ["HMAC", "URL security", "CSRF protection", "passwordless authentication", "magic links", "web security"],
+            "articleSection": "Web Security",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@type": "Blog",
+                "name": "Cyril Kato's Blog",
+                "url": "https://blog.cyril.email/"
+            },
+            "citation": [
+                {
+                    "@type": "ScholarlyArticle",
+                    "name": "HMAC: Keyed-Hashing for Message Authentication",
+                    "author": ["Krawczyk, H.", "Bellare, M.", "Canetti, R."],
+                    "datePublished": "1997",
+                    "url": "https://tools.ietf.org/rfc/rfc2104.txt"
+                }
+            ]
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <p>Cyril Kato's blog</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="https://cyril.email/" title="About Cyril Kato">About</a></li>
+                <li><a href="/" title="Cyril Kato's blog posts">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <header>
+                <h1>URL Protection Through HMAC: A Practical Approach</h1>
+                <time datetime="2025-03-12">March 12, 2025</time>
+            </header>
+
+            <section>
+                <p>Web applications routinely generate URLs that carry meaning: a link to delete a resource, a password reset token, an invitation to join a workspace. These URLs often encode parameters that, if tampered with, could grant unintended access or trigger unauthorized actions. I found myself repeatedly implementing ad-hoc solutions to this problem, until I settled on a pattern general enough to share.</p>
+
+                <p>The approach I describe here uses HMAC (Hash-based Message Authentication Code) to embed cryptographic signatures directly within URLs. The server generates and verifies these signatures; clients simply use the URLs as opaque tokens. This simplicity is the point—by keeping all secrets server-side, we avoid an entire class of implementation mistakes.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>The core idea</h2>
+
+                <p>The protocol rests on a simple asymmetry: only the server knows the secret key. The server generates signed URLs, and the server verifies them. Clients never need to understand or manipulate the signature—they just follow links.</p>
+
+                <p>Any modification to a signed URL invalidates its signature. Change a single character in the path or query string, and verification fails. This makes the URLs tamper-proof without requiring any client-side cryptography.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>A convention for signature placement</h2>
+
+                <p>I needed a place to put the signature that would be unambiguous and unlikely to collide with application routes. Drawing inspiration from Unix conventions—where files prefixed with a dot are treated as hidden—I settled on prefixing the signature with a period in the URL path:</p>
+
+                <pre><code>https://example.com/.abc123def456/resource/42?action=edit</code></pre>
+
+                <p>Here, <code>.abc123def456</code> is the signature. Everything after it—the path and query parameters—is what gets authenticated. The dot prefix makes it visually distinct and easy to parse programmatically.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Signing a URL</h2>
+
+                <p>The signing process starts with a URL template containing a placeholder for the signature. I use <code>__SIGNATURE__</code> as my convention:</p>
+
+                <pre><code>https://example.com/__SIGNATURE__/resource/42?action=edit</code></pre>
+
+                <p>To compute the signature, I first replace the placeholder with an empty string, creating a base string:</p>
+
+                <pre><code>https://example.com//resource/42?action=edit</code></pre>
+
+                <p>I then calculate the HMAC-SHA256 of this base string using the server's secret key, encode the result as URL-safe Base64 without padding, and substitute it back into the template with a leading dot:</p>
+
+                <pre><code>https://example.com/.abc123def456/resource/42?action=edit</code></pre>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Verifying a URL</h2>
+
+                <p>Verification reverses the process. When a request arrives, I extract the signature component (the path segment starting with a dot), remove it from the URL to reconstruct the base string, compute what the signature should be, and compare. If they match, the URL is authentic.</p>
+
+                <p>One detail matters here: the comparison must be constant-time. A naive string comparison that returns early on the first mismatched character leaks timing information that could help an attacker forge signatures. Most cryptographic libraries provide a secure comparison function for this purpose.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Pseudo-code</h2>
+
+                <p>For clarity, here is the signing and verification logic in pseudo-code:</p>
+
+                <pre><code>function sign_url(url_template, secret_key, placeholder):
+    base_string = url_template.replace(placeholder, "")
+    hmac_digest = hmac_sha256(secret_key, base_string)
+    signature = base64_url_encode(hmac_digest).rstrip("=")
+    return url_template.replace(placeholder, "." + signature)
+
+function verify_url(signed_url, secret_key):
+    for component in parse_path(signed_url):
+        if component.starts_with("."):
+            signature = component[1:]
+            base_string = signed_url.replace(component, "")
+            expected = base64_url_encode(hmac_sha256(secret_key, base_string)).rstrip("=")
+            return secure_compare(signature, expected)
+    return false</code></pre>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Applications</h2>
+
+                <section>
+                    <h3>Generalizing CSRF protection</h3>
+
+                    <p>CSRF tokens traditionally protect form submissions, but the same principle applies to any state-changing URL. A deletion link, an approval action, a settings toggle—all can be protected by signing the URL. The signature serves the same purpose as a CSRF token: proving the link was generated by the server for this specific action.</p>
+
+                    <pre><code>function generate_delete_link(resource_id):
+    template = "/.__TOKEN__/resources/{id}/delete"
+    return sign_url(template.replace("{id}", resource_id), SECRET_KEY, "__TOKEN__")
+
+function handle_delete_request(request):
+    if verify_url(request.url, SECRET_KEY):
+        delete_resource(extract_resource_id(request.url))
+        return success_response()
+    return unauthorized_response()</code></pre>
+                </section>
+
+                <section>
+                    <h3>Magic links for passwordless authentication</h3>
+
+                    <p>Passwordless login flows often email users a "magic link" that grants access. The security of this pattern depends entirely on the link being unforgeable. By signing the link with an embedded expiration timestamp, I can ensure both authenticity and time-limited validity:</p>
+
+                    <pre><code>function generate_login_link(user_email):
+    expiration = current_time() + LINK_VALIDITY_DURATION
+    template = "/.__TOKEN__/login?user={email}&amp;expires={exp}"
+    template = template.replace("{email}", url_encode(user_email))
+    template = template.replace("{exp}", expiration.to_string())
+    return base_url() + sign_url(template, SECRET_KEY, "__TOKEN__")
+
+function handle_magic_link(request):
+    if not verify_url(request.url, SECRET_KEY):
+        return unauthorized_response()
+
+    expiration = parse_timestamp(extract_parameter(request.url, "expires"))
+    if current_time() > expiration:
+        return link_expired_response()
+
+    authenticate_user(extract_parameter(request.url, "user"))
+    return redirect_to_dashboard()</code></pre>
+                </section>
+
+                <section>
+                    <h3>Secure document sharing</h3>
+
+                    <p>When sharing documents with specific permissions, the signed URL can encode exactly what access is granted. An attacker cannot escalate from read-only to read-write by modifying the URL—any change breaks the signature:</p>
+
+                    <pre><code>function generate_document_link(document_id, permissions):
+    template = "/.__TOKEN__/documents/{id}?permissions={perms}"
+    template = template.replace("{id}", document_id)
+    template = template.replace("{perms}", encode_permissions(permissions))
+    return base_url() + sign_url(template, SECRET_KEY, "__TOKEN__")</code></pre>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Security considerations</h2>
+
+                <p>The protocol's strength derives entirely from the secret key. It should have at least 256 bits of entropy, be rotated periodically, and never be exposed to clients. Different applications or environments should use different keys.</p>
+
+                <p>Signed URLs can be replayed—anyone who obtains a valid URL can use it. For sensitive operations, I recommend including expiration timestamps (verified during validation), single-use nonces for critical actions, or session identifiers that tie the URL to a specific user session.</p>
+
+                <p>Transport security matters too. Always use HTTPS. A signed URL intercepted over plaintext HTTP can be replayed by an attacker, and the signature provides no protection against eavesdropping.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Conclusion</h2>
+
+                <p>This pattern has served me well across several projects. It extends CSRF protection beyond forms, simplifies magic link implementations, and provides a clean way to generate tamper-proof URLs for any purpose.</p>
+
+                <p>The approach works because it keeps complexity on the server side. Clients don't need cryptographic capabilities; they just follow links. And because HMAC is well-understood and widely implemented, I can trust the cryptographic foundation without building it myself.</p>
+
+                <p>As with any security mechanism, this should be one layer among several. It complements—but does not replace—proper authentication, authorization, and transport security.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>References</h2>
+                <ol>
+                    <li>Krawczyk, H., Bellare, M., &amp; Canetti, R. (1997). <em>HMAC: Keyed-Hashing for Message Authentication</em>. RFC 2104.</li>
+                    <li>OWASP. (2024). <em>Cross-Site Request Forgery Prevention Cheat Sheet</em>. OWASP Cheat Sheet Series.</li>
+                    <li>Stallings, W. (2017). <em>Cryptography and Network Security: Principles and Practice</em> (7th ed.). Pearson.</li>
+                    <li>Ferguson, N., Schneier, B., &amp; Kohno, T. (2010). <em>Cryptography Engineering: Design Principles and Practical Applications</em>. Wiley.</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>
+            © 2014–2025 Cyril Kato. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>

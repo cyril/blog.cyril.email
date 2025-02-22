@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="A test suite is only as trustworthy as the framework beneath it, and a framework is a program like any other. Why I wrote my own, what it keeps apart, and why it took twelve years to call it finished.">
+    <meta name="keywords" content="Ruby, testing, test framework, RSpec, Fix, RSpec clone, specifications, unit tests, reliability, RFC 2119, Cyril Kato">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Cyril Kato">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Specs and Tests Are Two Different Things">
+    <meta property="og:description" content="A test suite is only as trustworthy as the framework beneath it, and a framework is a program like any other. Why I wrote my own, what it keeps apart, and why it took twelve years to call it finished.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.cyril.email/posts/2026-11-01/specs-and-tests-are-two-different-things.html">
+    <meta property="og:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta property="og:site_name" content="Cyril Kato's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-11-01">
+    <meta property="article:author" content="Cyril Kato">
+    <meta property="article:section" content="Software">
+    <meta property="article:tag" content="Ruby">
+    <meta property="article:tag" content="testing">
+    <meta property="article:tag" content="Fix">
+    <meta property="article:tag" content="RSpec">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Specs and Tests Are Two Different Things">
+    <meta name="twitter:description" content="A test suite is only as trustworthy as the framework beneath it, and a framework is a program like any other. Why I wrote my own, what it keeps apart, and why it took twelve years to call it finished.">
+    <meta name="twitter:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta name="twitter:image:alt" content="Cyril Kato">
+
+    <title>Specs and Tests Are Two Different Things</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon/favicon.svg">
+    <link rel="icon" type="image/png" href="../../favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-title" content="Cyril's Blog">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="canonical" href="https://blog.cyril.email/posts/2026-11-01/specs-and-tests-are-two-different-things.html">
+
+    <!-- Feed -->
+    <link rel="alternate" type="application/feed+json" title="Cyril Kato's blog" href="/feed.json">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "Specs and Tests Are Two Different Things",
+            "description": "A test suite is only as trustworthy as the framework beneath it, and a framework is a program like any other. Why I wrote my own, what it keeps apart, and why it took twelve years to call it finished.",
+            "datePublished": "2026-11-01",
+            "dateModified": "2026-11-01",
+            "author": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/",
+                "image": "https://cyril.email/img/cyril-kato,w_384.webp",
+                "jobTitle": "Open Source Developer",
+                "sameAs": [
+                    "https://github.com/cyril",
+                    "https://bsky.app/profile/cyril.email"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/"
+            },
+            "url": "https://blog.cyril.email/posts/2026-11-01/specs-and-tests-are-two-different-things.html",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://blog.cyril.email/posts/2026-11-01/specs-and-tests-are-two-different-things.html"
+            },
+            "keywords": ["Ruby", "testing", "test framework", "RSpec", "Fix", "RSpec clone", "specifications", "unit tests", "reliability", "RFC 2119"],
+            "articleSection": "Software",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@type": "Blog",
+                "name": "Cyril Kato's Blog",
+                "url": "https://blog.cyril.email/"
+            },
+            "about": [
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "Fix",
+                    "description": "A testing framework for Ruby in which a test suite is a specification",
+                    "url": "https://fixrb.dev/"
+                },
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "RSpec clone",
+                    "description": "A minimalist clone of RSpec, built on the libraries of Fix",
+                    "url": "https://github.com/cyril/r_spec-clone.rb"
+                }
+            ]
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <p>Cyril Kato's blog</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="https://cyril.email/" title="About Cyril Kato">About</a></li>
+                <li><a href="/" title="Cyril Kato's blog posts">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <header>
+                <h1>Specs and Tests Are Two Different Things</h1>
+                <time datetime="2026-11-01">November 1, 2026</time>
+            </header>
+
+            <section>
+                <p>I landed my first assignment in 2010, and I was proud of it. The recruiter told me I was the first Ruby developer he had ever placed. The company wanted to stabilize its code with unit tests, and my job was to help by writing new ones.</p>
+
+                <p>It did not take long to understand what I was there for: to check, every time the code changed, what it really did. Not what it was meant to do, not what its author remembered of it. What it did.</p>
+
+                <p>That is where test frameworks caught my interest. Nobody can prove that a program works. What a framework offers instead is a way to describe an expected behaviour, scenario by scenario, and to show that the code behaves that way in each of them. When the scenarios cover every kind of case there is, the demonstration gets as close to a proof as we will ever get.</p>
+
+                <p>So all the confidence comes to rest on the test suite, on one condition: that the primitive the suite stands on is itself perfectly sound. In practice, that condition is never examined. The framework is the ground everything else is measured against, and the ground is not something one questions. It takes on a sacred air.</p>
+
+                <p>Yet a test framework is a program like any other. It can be large, and complex, sometimes more complex than the code it is asked to test. It has bugs, as every program has, and a bug in the wrong place does not fail loudly: it cascades into a false positive, and the suite goes green over code that is wrong. The reliability of that primitive is not a detail. It is the whole point.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <p>The framework in my story was RSpec. Curiosity sent me into its source code, to demystify how it worked and how its domain-specific language was put together. I ran into a wall of complexity: metaprogramming on every floor, monkey patching, mutation all over the place. I came out knowing less about what my tests were resting on than when I went in.</p>
+
+                <p>A few years later, playing with Ruby's API, I started hacking, designing and implementing a test framework of my own. I called it <a href="https://fixrb.dev/">Fix</a>, and I built it the empirical way, by trial and error, showing it along the road at <a href="https://rubykansai.doorkeeper.jp/events/14266">Ruby Kansai</a> (<a href="https://speakerdeck.com/cyril/konbanha-tiao-jian-yabiheibiatesuto">slides</a>) and at <a href="https://www.meetup.com/fr-fr/parisrb/events/220872045/">ParisRb</a> (<a href="https://speakerdeck.com/cyril/fix-simple-stupid-testing-framework-for-ruby">slides</a>). The idea I wanted to put across was that a test framework should help keep two things apart:</p>
+
+                <ol>
+                    <li>specifications, which must be agnostic of any implementation of the code to be tested;</li>
+                    <li>a function to test outside code, by confronting it with those specifications.</li>
+                </ol>
+
+                <p>Put more simply: specs and tests are two different things, and the framework should not confuse them. A specification says what a subject must, should or may do, and nothing about how the subject is made. A test takes a subject and holds it against the specification. The first is a document; the second is a function. Keep them apart, and the primitive beneath the suite gets small enough to read in an afternoon, which is the only kind of primitive I am willing to trust.</p>
+
+                <p>That work kept me going for longer than I would have guessed. This week I published <a href="https://rubygems.org/gems/fix/versions/1.0.0">Fix 1.0</a>, the first version I consider finished. In its wake, I <a href="https://github.com/cyril/r_spec-clone.rb/releases/tag/v2.0.0">updated my RSpec clone to version 2</a>: the words of RSpec, running on the primitives of Fix.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <p>To every Ruby developer out there: happy hacking.</p>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>
+            © 2014–2026 Cyril Kato. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>

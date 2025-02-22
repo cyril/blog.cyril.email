@@ -1,0 +1,7 @@
+# macOS directory metadata, created by Finder wherever it looks.
+.DS_Store
+
+# Jekyll builds these when the site is generated locally. They are not part of
+# the source, and _config.yml keeps them out of the published site too.
+_site/
+.jekyll-cache/

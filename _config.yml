@@ -1,0 +1,25 @@
+# GitHub Pages builds this repository with Jekyll, and Jekyll publishes every
+# file it is not told to skip. Without this file the build script and its tests
+# would be fetchable at blog.cyril.email/bin/build.rb, the way README.md was.
+#
+# CNAME is the important line. On GitHub Pages the effective default exclude
+# list is exactly ["CNAME"] — which is why /README.md answered 200 and /CNAME
+# answered 404 before this file existed. Pages pins Jekyll 3, where `exclude`
+# REPLACES that list rather than extending it (Jekyll 4 appends), so omitting
+# CNAME here would publish it. The rest are Jekyll's own defaults, kept for the
+# day one of them exists.
+
+exclude:
+  - CNAME
+  - bin
+  - test
+  - README.md
+  - .github
+  - _site
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+
+# The pages are plain HTML with no front matter, so Jekyll copies them
+# verbatim; nothing here changes how they are served.

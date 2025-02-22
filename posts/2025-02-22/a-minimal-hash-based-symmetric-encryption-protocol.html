@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="A minimal symmetric encryption protocol using hash functions for message confidentiality, focusing on simplicity and fundamental cryptographic principles.">
+    <meta name="keywords" content="encryption, symmetric encryption, hash functions, cryptography, security protocol, message confidentiality, Cyril Kato">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Cyril Kato">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="A Minimal Hash-Based Symmetric Encryption Protocol">
+    <meta property="og:description" content="A minimal symmetric encryption protocol using hash functions for message confidentiality, focusing on simplicity and fundamental cryptographic principles.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.cyril.email/posts/2025-02-22/a-minimal-hash-based-symmetric-encryption-protocol.html">
+    <meta property="og:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta property="og:site_name" content="Cyril Kato's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-02-22">
+    <meta property="article:author" content="Cyril Kato">
+    <meta property="article:section" content="Cryptography">
+    <meta property="article:tag" content="encryption">
+    <meta property="article:tag" content="hash functions">
+    <meta property="article:tag" content="security">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="A Minimal Hash-Based Symmetric Encryption Protocol">
+    <meta name="twitter:description" content="A minimal symmetric encryption protocol using hash functions for message confidentiality, focusing on simplicity and fundamental cryptographic principles.">
+    <meta name="twitter:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta name="twitter:image:alt" content="Cyril Kato">
+
+    <title>A Minimal Hash-Based Symmetric Encryption Protocol</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon/favicon.svg">
+    <link rel="icon" type="image/png" href="../../favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-title" content="Cyril's Blog">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="canonical" href="https://blog.cyril.email/posts/2025-02-22/a-minimal-hash-based-symmetric-encryption-protocol.html">
+
+    <!-- Feed -->
+    <link rel="alternate" type="application/feed+json" title="Cyril Kato's blog" href="/feed.json">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "A Minimal Hash-Based Symmetric Encryption Protocol",
+            "description": "A minimal symmetric encryption protocol using hash functions for message confidentiality, focusing on simplicity and fundamental cryptographic principles.",
+            "datePublished": "2025-02-22",
+            "dateModified": "2025-02-22",
+            "author": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/",
+                "image": "https://cyril.email/img/cyril-kato,w_384.webp",
+                "jobTitle": "Open Source Developer",
+                "sameAs": [
+                    "https://github.com/cyril",
+                    "https://bsky.app/profile/cyril.email"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/"
+            },
+            "url": "https://blog.cyril.email/posts/2025-02-22/a-minimal-hash-based-symmetric-encryption-protocol.html",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://blog.cyril.email/posts/2025-02-22/a-minimal-hash-based-symmetric-encryption-protocol.html"
+            },
+            "keywords": ["encryption", "symmetric encryption", "hash functions", "cryptography", "security protocol"],
+            "articleSection": "Cryptography",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@type": "Blog",
+                "name": "Cyril Kato's Blog",
+                "url": "https://blog.cyril.email/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <p>Cyril Kato's blog</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="https://cyril.email/" title="About Cyril Kato">About</a></li>
+                <li><a href="/" title="Cyril Kato's blog posts">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <header>
+                <h1>A Minimal Hash-Based Symmetric Encryption Protocol</h1>
+                <time datetime="2025-02-22">February 22, 2025</time>
+            </header>
+
+            <section>
+                <p>I have long been drawn to cryptographic primitives for their elegance—how a handful of mathematical properties can guarantee something as consequential as secrecy. When exploring symmetric encryption, I found myself wondering: what is the simplest possible protocol that still provides meaningful confidentiality?</p>
+
+                <p>This article describes a minimalist approach I designed, relying solely on a cryptographic hash function. It focuses exclusively on message confidentiality, deliberately setting aside integrity and authentication. This isn't because those properties don't matter—they very much do—but because I wanted to isolate and understand confidentiality on its own terms.</p>
+
+                <p>The security of this protocol rests on three pillars: the strength of the chosen hash function, the entropy of the shared secret, and the crucial requirement that each secret be unique per message.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>The basic idea</h2>
+
+                <p>The protocol requires only two things: a cryptographic hash function H, and a shared secret S known to both sender and receiver. The key constraint is that S must be unique for each message—reusing a secret across messages would compromise the scheme entirely.</p>
+
+                <p>The approach is straightforward. I divide the message into blocks matching the hash output size, then XOR each block with a value derived from both the secret and the block's position. This creates a simple stream cipher where the hash function serves as a pseudorandom generator.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>How encryption works</h2>
+
+                <p>Let M be the message to encrypt, and n the output size of the hash function in bits.</p>
+
+                <p>First, I split M into blocks M₁, M₂, ..., Mₖ. Each block has n bits, except possibly the last one, which may be shorter. I deliberately avoid padding—if the final block has m bits where m < n, I simply use only the first m bits of the corresponding hash output.</p>
+
+                <p>For each block i, I compute:</p>
+
+                <pre><code>Cᵢ = Mᵢ ⊕ H(S || i)</code></pre>
+
+                <p>Here, || denotes concatenation and ⊕ is the bitwise XOR operation. The final ciphertext C is simply the concatenation of all encrypted blocks.</p>
+
+                <p>Decryption is symmetric: the receiver, knowing S, divides the ciphertext into blocks and applies the same XOR operation with the same derived values to recover the original message.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Why this works</h2>
+
+                <p>The protocol's confidentiality depends on several properties working together.</p>
+
+                <p>The hash function must be secure against preimage attacks—given H(x), it should be computationally infeasible to recover x. More importantly for our purposes, the output of H should be indistinguishable from random data. If an attacker cannot predict H(S || i), they cannot recover the plaintext from the ciphertext.</p>
+
+                <p>The shared secret needs sufficient entropy to resist brute-force attacks. And critically, using a fresh secret for each message prevents an attacker from correlating patterns across multiple ciphertexts. If the same secret were reused, XORing two ciphertexts would yield the XOR of the two plaintexts—a serious leak.</p>
+
+                <p>Each block uses a unique derived key because I include the block index in the hash input. This prevents patterns from emerging when identical plaintext blocks appear at different positions in the message.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>What this protocol does not do</h2>
+
+                <p>I want to be clear about the boundaries of this design. The protocol provides confidentiality only. It does not verify message integrity—an attacker could flip bits in the ciphertext, and the receiver would decrypt garbage without knowing something went wrong. It includes no authentication mechanism—the receiver cannot confirm the message actually came from the expected sender. And it offers no protection against replay attacks or message reordering.</p>
+
+                <p>These omissions are intentional. I wanted to understand what confidentiality alone looks like, stripped of the mechanisms that typically accompany it in production systems.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Practical considerations</h2>
+
+                <p>A few properties make this protocol pleasant to implement. The ciphertext length exactly matches the plaintext length—no padding overhead, no length leakage beyond what the original message already reveals. Each block can be encrypted or decrypted independently, enabling parallelization. And memory requirements are minimal: I can process a stream without buffering the entire message.</p>
+
+                <p>The computational cost is one hash operation per block. For a 256-bit hash function, that means one hash call per 32 bytes of message data—efficient enough for most purposes, though not competitive with dedicated stream ciphers for high-throughput applications.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Conclusion</h2>
+
+                <p>This protocol is an exercise in minimalism rather than a recommendation for production use. Real-world applications need integrity checking, authentication, and often much more. But there is value in understanding the simplest form of a cryptographic property—it clarifies what each layer of a more complete system actually contributes.</p>
+
+                <p>For anyone building on this foundation, the natural next step would be to add a MAC (Message Authentication Code) for integrity, and to design a key exchange mechanism so that the unique-secret-per-message requirement becomes practical to satisfy.</p>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>
+            © 2014–2025 Cyril Kato. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>

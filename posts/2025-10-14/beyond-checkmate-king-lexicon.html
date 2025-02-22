@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="A rule-agnostic lexicon for naming observable king states across chess traditions, with a tri-lingual mapping (Persian, Old French, English) and a pointer to the CGSN status spec.">
+    <meta name="keywords" content="checkmate, bare king, mare king, shah mat, shah tanha, shah-mar, shogi, xiangqi, stalemate, Sashité, CGSN, chess variants, board games, history, Cyril Kato">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Cyril Kato">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Beyond Checkmate: A Lexicon for the King's Fate">
+    <meta property="og:description" content="A historical, rule-agnostic tour of three observable king states—checkmate, bare king, captured king—mapped in Persian, Old French, and English, with CGSN status references.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.cyril.email/posts/2025-10-14/beyond-checkmate-king-lexicon.html">
+    <meta property="og:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta property="og:site_name" content="Cyril Kato's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-10-14">
+    <meta property="article:author" content="Cyril Kato">
+    <meta property="article:section" content="Game Development">
+    <meta property="article:tag" content="chess history">
+    <meta property="article:tag" content="Sashité">
+    <meta property="article:tag" content="CGSN">
+    <meta property="article:tag" content="notation">
+    <meta property="article:tag" content="board games">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Beyond Checkmate: A Lexicon for the King's Fate">
+    <meta name="twitter:description" content="A historical, rule-agnostic tour of three observable king states—checkmate, bare king, captured king—with a Persian–Old French–English mapping and CGSN links.">
+    <meta name="twitter:image" content="https://cyril.email/img/cyril-kato,w_384.webp">
+    <meta name="twitter:image:alt" content="Cyril Kato">
+
+    <title>Beyond Checkmate: A Lexicon for the King's Fate</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon/favicon.svg">
+    <link rel="icon" type="image/png" href="../../favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-title" content="Cyril's Blog">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="canonical" href="https://blog.cyril.email/posts/2025-10-14/beyond-checkmate-king-lexicon.html">
+
+    <!-- Feed -->
+    <link rel="alternate" type="application/feed+json" title="Cyril Kato's blog" href="/feed.json">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "Beyond Checkmate: A Lexicon for the King's Fate",
+            "description": "A rule-agnostic lexicon for naming observable king states across chess traditions, with a tri-lingual mapping (Persian, Old French, English) and a pointer to the CGSN status spec.",
+            "datePublished": "2025-10-14",
+            "dateModified": "2025-10-14",
+            "author": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/",
+                "image": "https://cyril.email/img/cyril-kato,w_384.webp",
+                "jobTitle": "Open Source Developer",
+                "sameAs": [
+                    "https://github.com/cyril",
+                    "https://bsky.app/profile/cyril.email"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": "Cyril Kato",
+                "url": "https://cyril.email/"
+            },
+            "url": "https://blog.cyril.email/posts/2025-10-14/beyond-checkmate-king-lexicon.html",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://blog.cyril.email/posts/2025-10-14/beyond-checkmate-king-lexicon.html"
+            },
+            "keywords": ["checkmate", "bare king", "mare king", "shogi", "xiangqi", "stalemate", "Sashité", "CGSN", "chess variants", "board games", "history"],
+            "articleSection": "Game Development",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@type": "Blog",
+                "name": "Cyril Kato's Blog",
+                "url": "https://blog.cyril.email/"
+            },
+            "about": [
+                {
+                    "@type": "Thing",
+                    "name": "CGSN",
+                    "url": "https://sashite.dev/specs/cgsn/",
+                    "description": "Chess Game Status Notation used within the Sashité protocol to record observable game states"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "Shāh Māt / Checkmate",
+                    "description": "State where the king is attacked and has no legal escape"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "Bare King",
+                    "description": "State where a side has only its king remaining"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "Mare King",
+                    "description": "State where the king has been actually captured and removed"
+                }
+            ]
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <p>Cyril Kato's blog</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="https://cyril.email/" title="About Cyril Kato">About</a></li>
+                <li><a href="/" title="Cyril Kato's blog posts">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <header>
+                <h1>Beyond Checkmate: A Lexicon for the King's Fate</h1>
+                <time datetime="2025-10-14">October 14, 2025</time>
+            </header>
+
+            <section>
+                <p>When I started studying chess variants seriously, I noticed how often discussions became tangled in terminology. The word "checkmate" carries centuries of cultural baggage. In Western chess, it marks the end of the game; in other traditions, the king might actually be captured, or the game might end when one side is reduced to a lone king. Same board, same pieces moving, but the vocabulary failed me when I tried to describe what I was seeing.</p>
+
+                <p>This led me to think about observable states versus rule interpretations. Before any ruleset decides what a position means—win, loss, draw—we can simply describe what is there. The king is under attack with no escape. The king stands alone. The king has been removed from the board. These are facts about the position, independent of how any particular game tradition scores them.</p>
+
+                <p>This article proposes a compact vocabulary for three such states, traced through Persian, Old French, and English. The goal is not historical completeness but practical clarity—names we can use when discussing games across traditions.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>A brief historical thread</h2>
+
+                <p>The games that descend from chaturanga—Perso-Arabic shatranj, Western chess, shogi, xiangqi, makruk—share a common ancestor but diverged in their treatment of the king's fate.</p>
+
+                <p>Early sources sometimes allowed the actual capture of the king. Some also treated the bare king—a king left without supporting pieces—as decisive or at least significant. As the game traveled westward, the Persian phrase <i lang="fa">shāh māt</i> ("the king is without recourse") became Old French <i lang="fro">eschec mat</i>, then English "checkmate." Etiquette and codification gradually shifted toward an abstract terminal: we stop when capture is unavoidable rather than physically taking the piece.</p>
+
+                <p>Modern traditions diverge further. In Western chess, stalemate is a draw. In shogi and xiangqi, stalemate typically loses for the side without a legal move. The same observable state, valued differently by different rules.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Three states, three names</h2>
+
+                <p>I settled on three terms, rooted in Persian but with Old French and English counterparts:</p>
+
+                <table>
+                    <caption>Observable king states across three languages</caption>
+                    <thead>
+                        <tr>
+                            <th>Persian</th>
+                            <th>Old French</th>
+                            <th>English</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i lang="fa">Shāh Māt</i> (<i lang="fa">شاه مات</i>)</td>
+                            <td lang="fro">Eschec mat</td>
+                            <td>Checkmate</td>
+                        </tr>
+                        <tr>
+                            <td><i lang="fa">Shāh Tanhā</i> (<i lang="fa">شاه تنها</i>)</td>
+                            <td lang="fro">Roi nu</td>
+                            <td>Bare King</td>
+                        </tr>
+                        <tr>
+                            <td><i lang="fa">Shāh-mar</i> (<i lang="fa">شاه مر</i>)</td>
+                            <td lang="fro">Roi tu</td>
+                            <td>Mare King</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <section>
+                    <h3>Checkmate</h3>
+
+                    <p>The king is under attack and has no legal escape. Modern convention typically ends the game at this moment of inevitability—before the king is physically captured. The Persian root <i lang="fa">māt</i> conveys helplessness or defeat rather than death, though folk etymology often links it to the Arabic verb <i lang="ar">māta</i> ("died"). This distinction reflects chess's evolution from direct capture to abstract terminal positions.</p>
+                </section>
+
+                <section>
+                    <h3>Bare king</h3>
+
+                    <p>A side is reduced to its king alone, stripped of all supporting pieces. Whether this constitutes a decisive end or merely a vulnerable position depends entirely on the game tradition. Some rule systems, like historical shatranj, treat the bare king as an immediate terminal state. Others, like certain xiangqi variants, allow play to continue since the lone king may still participate in delivering checkmate. What counts as "bare" may also vary—for instance, whether pawns alone suffice to avoid this designation.</p>
+                </section>
+
+                <section>
+                    <h3>Mare king</h3>
+
+                    <p>The king is physically captured and removed from the board—not merely trapped as in checkmate, but actually taken. This occurs in two scenarios: when etiquette doesn't pre-empt a checkmate position, or when game rules permit leaving one's king in check, allowing direct capture on the next move.</p>
+
+                    <p>The English term "mare king" is a modern coinage, intentionally echoing "nightmare" to evoke the finality of capture. The Old French <i lang="fro">roi tu</i> uses the archaic past participle of <i lang="fro">tuer</i> ("to kill"), lending a stark, poetic quality. Both describe the same observable fact: the king is gone.</p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Etiquette, stalemate, and plural endings</h2>
+
+                <p>In many circles, it is courteous to resign once mate is inevitable, sparing the choreography of capture. Elsewhere, actually taking the king remains valid—especially in traditions where checks may be ignored by rule.</p>
+
+                <p>Stalemate illustrates the gap between state and value particularly well. Western chess treats it as a draw. Shogi and xiangqi typically count it as a loss for the side with no legal move. Identical position, opposite outcome.</p>
+
+                <p>These contrasts are precisely why I find a shared lexicon useful. We name the state first—checkmate, bare king, mare king—and let the ruleset declare what it is worth.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Where this lands in Sashité</h2>
+
+                <p>For those recording or exchanging games, the Chess Game Status Notation (CGSN) provides standardized, rule-agnostic status identifiers—<code>checkmate</code>, <code>bareking</code>, <code>mareking</code>—that capture observable facts without assigning competitive outcomes. This cleanly separates "what happened" from "who won," allowing different traditions to interpret the same record according to their own rules.</p>
+
+                <p>The specification is available at <a href="https://sashite.dev/specs/cgsn/" rel="noopener" title="CGSN specification">sashite.dev/specs/cgsn/</a>.</p>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>
+            © 2014–2025 Cyril Kato. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>

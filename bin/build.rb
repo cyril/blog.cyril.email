@@ -345,6 +345,7 @@ module Build
       ["<li>",
        "                <a href=\"#{escape_html(post.href)}\">#{escape_html(post.title)}</a>",
        "                <time datetime=\"#{post.date}\">#{post.long_date}</time>",
+       "                <p>#{escape_html(post.summary)}</p>",
        "            </li>"].join("\n")
     }.join("\n            ")
 

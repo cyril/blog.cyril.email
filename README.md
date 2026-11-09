@@ -36,7 +36,8 @@ order, so a local run and a CI run produce identical bytes.
 - `feed.json` — JSON Feed 1.1, summary-only, newest first.
 - `sitemap.xml` — `<loc>` and `<lastmod>` only. Google states it ignores
   `<priority>` and `<changefreq>`, so they are not emitted.
-- `index.html` — **two regions only**: the `<ol>` list of posts, and the
+- `index.html` — **two regions only**: the `<ol>` list of posts (title, date
+  and description), and the
   `blogPost` array inside the JSON-LD block. Everything else in that file —
   header, navigation, headings, footer, page metadata — is hand-written and
   never touched.
@@ -59,7 +60,7 @@ Read from each post's `<head>`:
 | `<meta property="og:title">` | required — the title in the list, the feed and the JSON-LD |
 | `<meta property="article:published_time">` | required — `YYYY-MM-DD`, or a full ISO 8601 timestamp |
 | `<link rel="canonical">` | required — must be exactly `https://blog.cyril.email/` + the file's path |
-| `<meta name="description">` | required — the feed's `summary` and `content_text`, which JSON Feed requires |
+| `<meta name="description">` | required — the feed's `summary` and `content_text`, which JSON Feed requires; also shown under the title on the index |
 | `<meta property="article:section">`, `<meta property="article:tag">` | the feed's `tags` |
 | `<meta property="article:modified_time">` | optional — sets `<lastmod>`; add it when correcting a published post |
 | `<html lang>` | must match the JSON-LD `inLanguage` |
@@ -123,7 +124,7 @@ and a JSON-LD field contradicting the `<meta>` tags.
 ruby test/build_test.rb
 ```
 
-Sixty checks, standard library only. Each one runs the real script against
+Sixty-one checks, standard library only. Each one runs the real script against
 a throwaway site built from scratch in a temporary directory, so publishing an
 article can never break the suite; only the last check looks at this
 repository.

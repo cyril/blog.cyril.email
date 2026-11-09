@@ -429,6 +429,15 @@ group("Generated output") do
     end
   end
 
+  check("each index item carries the post's description, escaped") do
+    sandbox do |site|
+      site.add_post(date: "2026-01-01", slug: "a", description: "Rooks & chariots.")
+      site.run
+      site.read("index.html").include?("<time datetime=\"2026-01-01\">January 1, 2026</time>\n                <p>Rooks &amp; chariots.</p>\n            </li>") &&
+        site.feed["items"].first["summary"] == "Rooks & chariots."
+    end
+  end
+
   check("an ampersand is escaped in HTML and left raw in JSON") do
     sandbox do |site|
       site.add_post(date: "2026-01-01", slug: "a", title: "Rooks & Chariots")

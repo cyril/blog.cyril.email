@@ -38,18 +38,6 @@
   "categories": ["productivity", "developer", "blog", "education"],
   "shortcuts": [
     {
-      "name": "Latest Post",
-      "short_name": "Latest",
-      "description": "Read the latest blog post",
-      "url": "/posts/2025-05-01/introducing-feen-notation.html",
-      "icons": [
-        {
-          "src": "favicon/favicon-96x96.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
       "name": "About Cyril",
       "short_name": "About",
       "description": "Learn more about Cyril Kato",
